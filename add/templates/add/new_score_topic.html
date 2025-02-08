@@ -1,0 +1,21 @@
+{%extends "op/base.html"%}  
+  
+{%block content%}  
+<div class="container mt-5"> 
+    <h3 class="text-center mb-4">添加积分项</h3>  
+    <form method="POST" class="form-group" action="{% url 'add:new_score_topic' %}">  
+        {% csrf_token %}  
+        积分项目：
+        <input type="text" name="topic" maxlength="20" required><br>
+        所属用户：
+        <select name="owner">
+            {%for user in users%}
+            <option value={{user}}>{{user.last_name}}{{user.first_name}}</option>
+            {%endfor%}
+        </select> 
+        <div class="text-center mt-4">  
+            <button type="submit" class="btn btn-primary">提交</button>  
+        </div>  
+    </form>  
+</div>  
+{%endblock content%}

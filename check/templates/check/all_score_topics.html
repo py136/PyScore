@@ -1,0 +1,25 @@
+{%extends "op/base.html"%}  
+  
+{%block content%}  
+<div class="container mt-5">  
+    <div class="row">  
+        <div class="col-md-12">  
+            <h2>各用户积分情况</h2>
+            <a  href="{%url 'add:new_score_topic'%}"  class="btn btn-success">记录</a>
+            <ul class="list-group">  
+                {% for topic in topics %}  
+                <li class="list-group-item d-flex justify-content-between align-items-center">  
+                    <a href="{% url 'check:all_details' topic.id%}">{{ topic }}</a>  
+                    <small class="text-muted">{{topic.owner.last_name}}{{topic.owner.first_name}}</small>
+                    <a class="btn btn-danger btn-sm" href="{% url 'delete:delete_score_topic' topic.id%}">撤销</a>
+                </li>  
+                {% empty %}  
+                <li class="list-group-item">  
+                    还没有任何积分记录  
+                </li>  
+                {% endfor %}  
+            </ul>  
+        </div>  
+    </div>  
+</div>  
+{%endblock content%}

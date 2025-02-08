@@ -1,0 +1,27 @@
+{%extends "op/base.html"%}  
+  
+{%block content%}  
+<div class="container mt-5">  
+    <div class="row">  
+        <div class="col-md-12">  
+            <h2>待审核</h2>
+  
+            <ul class="list-group">
+                {% for entry in entries %}  
+                <li class="list-group-item">  
+                    <p>详细内容：{{ entry.text|linebreaks }}</p>  
+                    <p>对应分数：{{entry.score}}</p>
+                    <p>申诉原因:{{entry.reason}}</p>
+                    <small class="text-muted">用户：{{entry.owner.last_name}}{{entry.owner.first_name}}</small>
+                    <a class="btn btn-success" href="{% url 'complaint:deal_complaint_detail' entry.id%}">处理</a>  
+                </li> 
+                {% empty %}
+                <li class="list-group-item">
+                    还没有待审核的条目
+                </li>
+                {% endfor %} 
+            </ul>  
+        </div>  
+    </div>  
+</div>  
+{%endblock content%}

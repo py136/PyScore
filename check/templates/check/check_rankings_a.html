@@ -1,0 +1,50 @@
+{%extends "op/base.html"%}  
+  
+{%block content%}  
+<div class="container mt-5">  
+    <div class="row">  
+        <div class="col-md-12">  
+            <h2>用户排名</h2> 
+            <a class="btn btn-success" href="{% url 'ranking:rank' %}">更新排名</a>
+
+            <style>
+                table {
+                    width: 50%;
+                    border-collapse: collapse;
+                }
+                th, td {
+                    border: 1px solid black;
+                    padding: 8px;
+                    text-align: left;
+                }
+                th {
+                    background-color: #f2f2f2;
+                }
+            </style>
+
+            <table>
+                <tr>
+                    <th>名次</th>
+                    <th>姓名</th>
+                    <th>得分</th>     
+                </tr>
+                {% for ranking in rankings %}
+                    <tr>
+                        <td>{{ ranking.rank }}</td>
+                        <td>{{ ranking.user }}</td>
+                        <td>{{ ranking.score }}</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                {% endfor %} 
+            </table>
+                
+            </ul>  
+        </div>  
+    </div>  
+</div>  
+{%endblock content%}

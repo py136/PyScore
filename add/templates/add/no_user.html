@@ -1,0 +1,16 @@
+{% extends "op/base.html" %}  
+  
+{% block content %}  
+<div class="container mt-5">  
+    <div class="row justify-content-center">  
+        <div class="col-md-6">  
+            <div class="alert alert-warning" role="alert">  
+                <h4 class="alert-heading">用户{{user}}不存在(404)</h4>
+                <p>请检查您所输入的用户名是否正确</p>
+                <hr>  
+                <p class="mb-0">您可以尝试返回<a href="{% url 'add:new_score_topic' %}" class="alert-link">上一级</a></p>  
+            </div>  
+        </div>  
+    </div>  
+</div>  
+{% endblock content %}

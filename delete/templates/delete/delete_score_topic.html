@@ -1,0 +1,22 @@
+{%extends "op/base.html"%}  
+  
+{%block content%}  
+<div class="container mt-5">  
+    <div class="row justify-content-center">  
+        <div class="col-md-6">  
+            <h4 class="text-center mb-4">撤销积分项目</h4> 
+            <p>名称:{{topic.text}}</p>
+            <p>所属用户：{{topic.owner.last_name}}{{topic.owner.first_name}}</p>
+            <p class="text-center">您确定要撤销这个积分项目吗?</p>  
+  
+            <form action="{% url 'delete:delete_score_topic' topic.id %}" method="POST">  
+                {% csrf_token %}  
+                <div class="text-center mt-4">  
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('撤销后将无法恢复，您确定要继续吗？');">是的，我想撤销它</button>  
+                    <a href="{% url 'check:all_score_topics' %}" class="btn btn-secondary">没有，我还需要想一想</a>  
+                </div>  
+            </form>  
+        </div>  
+    </div>  
+</div>  
+{%endblock content%}

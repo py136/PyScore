@@ -1,0 +1,29 @@
+{%extends "op/base.html"%}  
+  
+{%block content%}  
+<div class="container mt-5">  
+    <div class="row">  
+        <div class="col-md-12">  
+            <h2>积分项目：{{ topic }}</h2> 
+            <h3>总分：{{total}}</h3>
+            <a  href="{%url 'add:new_score' topic.id%}"  class="btn btn-success">记录</a>
+            <h3>详细内容</h3>  
+  
+            <ul class="list-group">
+                {% for entry in entries %}  
+                <li class="list-group-item">  
+                    <p>详细内容：{{ entry.text|linebreaks }}</p>  
+                    <p>对应分数：{{entry.score}}</p>
+                    <small class="text-muted">时间：{{ entry.date_added|date:'Y-m-d H:i' }}</small>
+                    <a class="btn btn-danger btn-sm" href="{% url 'delete:delete_score_detail' entry.id%}">撤销</a>
+                </li> 
+                {% empty %}
+                <li class="list-group-item">
+                    还没有积分项目
+                </li>
+                {% endfor %} 
+            </ul>  
+        </div>  
+    </div>  
+</div>  
+{%endblock content%}

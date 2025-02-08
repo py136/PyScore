@@ -1,0 +1,20 @@
+{%extends "op/base.html"%}  
+  
+{%block content%}  
+<div class="container mt-5">  
+    <div class="row justify-content-center">  
+        <div class="col-md-6">  
+            <h4 class="text-center mb-4">撤销计分</h4>  
+            <p class="text-center">您确定要撤销这条计分记录吗？</p>  
+  
+            <form action="{% url 'delete:delete_score_detail' entry.id %}" method="POST">  
+                {% csrf_token %}  
+                <div class="text-center mt-4">  
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('您确定要撤销这条记录吗？');">是的，我想撤销它</button>  
+                    <a href="{% url 'check:all_details' topic.id %}" class="btn btn-secondary">没有，我还需要想一想</a>  
+                </div>  
+            </form>  
+        </div>  
+    </div>  
+</div>  
+{%endblock content%}
