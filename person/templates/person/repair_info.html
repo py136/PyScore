@@ -1,0 +1,20 @@
+{%extends "check/base.html"%}  
+  
+{%block content%}  
+<div class="container mt-5">   
+    <h3 class="text-center mb-4">修改个人信息</h3>  
+    <form method="POST" class="form-group" action="{%url 'person:repair_info'%}">  
+        {% csrf_token %}
+        姓氏：
+        <input maxlength="30" value="{{request.user.last_name}}" name="last_name" required><br>
+        名字：
+        <input maxlength="150" value="{{request.user.first_name}}" name="first_name" required><br>
+        邮箱：
+        <input value="{{request.user.email}}" name="email"><br>
+        <div class="text-center mt-4">  
+            <button type="submit" class="btn btn-primary">保存修改</button>
+            <a class="btn btn-secondary" href="{%url 'person:person'%}">返回</a> 
+        </div>
+    </form>  
+</div>  
+{%endblock content%}

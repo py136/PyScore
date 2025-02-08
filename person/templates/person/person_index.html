@@ -1,0 +1,18 @@
+{%extends "check/base.html"%}  
+  
+{%block content%}
+<div class="container mt-5">  
+    <div class="row">  
+        <div class="col-md-12">  
+            <h2>用户信息</h2>  
+  
+            <ul class="list-group">
+                <p>姓氏：{{request.user.last_name}}</p>
+                <p>名字：{{request.user.first_name}}</p>
+                <p>电子邮箱：{{request.user.email}}</p>
+                <a class="btn btn-success" href="{% url 'person:repair_info'%}">修改个人信息</a>
+            </ul>  
+        </div>  
+    </div>  
+</div>  
+{%endblock content%}
