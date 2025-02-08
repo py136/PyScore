@@ -85,9 +85,9 @@ WSGI_APPLICATION = 'Score.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'scoredb',
-        'USER' : 'root',
-        'PASSWORD' : 'Zls788207()',
+        'NAME': '',
+        'USER' : '',
+        'PASSWORD' : '',
         'HOST' : 'localhost',
         'PORT' : '3306',
         'OPTIONS' : {
