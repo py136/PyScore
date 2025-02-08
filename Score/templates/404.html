@@ -1,0 +1,16 @@
+{% extends "check/base.html" %}  
+  
+{% block content %}  
+<div class="container mt-5">  
+    <div class="row justify-content-center">  
+        <div class="col-md-6">  
+            <div class="alert alert-warning" role="alert">  
+                <h4 class="alert-heading">诶呀，客官，您要的东西我们没找到(404)</h4>  
+                <p>您可能输入了错误的网址，或者您要找的页面已经不存在了。</p>  
+                <hr>  
+                <p class="mb-0">您可以尝试返回<a href="{% url 'check:index' %}" class="alert-link">首页</a>，或者使用搜索框查找。</p>  
+            </div>  
+        </div>  
+    </div>  
+</div>  
+{% endblock content %}
