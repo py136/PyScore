@@ -11,6 +11,9 @@ PyScore 是一个基于 Django 的积分管理系统，允许用户添加、删�
 - 申诉积分记录
 - 查看和处理申诉记录
 - 用户排名
+- OP界面
+- 管理后台
+- 个人中心
 
 ## 文件结构
 .
@@ -149,6 +152,36 @@ PyScore 是一个基于 Django 的积分管理系统，允许用户添加、删�
 │   │   ├── 500.html
 └── requirements.txt
 
+## 对应URL
+、、、
+1."users/login/"&"users/register/"    #用户登录/注册
+2."users/logout/"       #用户注销
+3."score_topics/"       #查看自己的积分项目
+4."entry/(topic_id)/"     #查看自己的积分详情
+5."complaint_detail/(entry_id)/"     #申诉计分记录
+6."complaint/check_complaint_histories_user/"         #查看申诉历史
+7."detele/delete_complaint_histories_user/"          #删除申诉历史
+8."check_rankings/"                 #查看排名
+9."ranking/rank/"                  #对用户进行排名
+10."check_histories/"                #查看积分历史
+11."detele/delete_histories/"         #删除积分历史
+12."person/person/"                #个人中心
+13."person/repair_info/"            #修改个人信息
+14."op/"                           #OP界面
+15."all_score_topics/"           #查看所有用户积分记录
+16."add/new_score_topic/"             #添加积分记录
+17."detele/delete_score_topic/(topic_id)/"      #删除某条积分记录
+18."all_details/(topic_id)/"              #查看该用户积分详情
+19."add/new_score/(topic_id)/"            #添加积分详情
+20."detele/delete_score_detail/(entry_id)/"      #撤销某条积分详情
+21."complaint/complaint_index"                    #申诉主界面
+22."complaint/check_complaint_details/"         #查看待审核的申诉
+23."complaint/deal_complaint_detail/(entry_id)/"       #处理申诉
+24."complaint/check_complaint_histories/"             #查看已申诉的条目
+25."detele/delete_complaint_histories/"             #删除已申诉的条目
+26."admin/"                                   #Django管理后台
+、、、
+
 
 ## 安装并用开发服务器运行此项目
 
@@ -233,6 +266,9 @@ PyScore 是一个基于 Django 的积分管理系统，允许用户添加、删�
     ```
 2. 将用户加入到特定用户组中：
     需要超级用户通过Django admin手动添加
+
+## 注意
+# 此项目仅为DEMO,请勿直接应用于生产环境
 
 ## 贡献
 
