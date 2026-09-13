@@ -1,4 +1,4 @@
-# PyScore
+# PyScore 1.0
 
 PyScore 是一个基于 Django 的积分管理系统，允许用户添加、删除、查看和申诉积分记录，并进行用户排名。
 
