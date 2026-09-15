@@ -1,0 +1,26 @@
+{%extends "op/base.html"%}  
+  
+{%block content%}
+<div class="container mt-5">  
+    <div class="row">  
+        <div class="col-md-12">  
+            <h2>用户信息</h2>  
+  
+            <ul class="list-group">
+                <p>姓氏：{{tar_user.last_name}}</p>
+                <p>名字：{{tar_user.first_name}}</p>
+                <p>电子邮箱：{{tar_user.email}}</p>
+                <p>所属用户组：</p>
+                <ul>
+                    {% for group in groups %}
+                        <li>{{ group.name }}</li>
+                    {% empty %}
+                        <li>无</li>
+                    {% endfor %}
+                </ul>
+                <a class="btn btn-success" href="{% url 'op:repair_user' tar_user.username %}">编辑信息</a>
+            </ul>  
+        </div>  
+    </div>  
+</div>  
+{%endblock content%}

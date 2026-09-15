@@ -1,0 +1,27 @@
+{% extends "check/base.html" %}  
+  
+{% block content %}  
+  <div class="container mt-5">  
+    <div class="row justify-content-center">  
+      <div class="col-md-6">  
+        <div class="card">  
+          <div class="card-body">  
+            <h5 class="card-title text-center">登录</h5>  
+            {% if form.errors %}  
+              <div class="alert alert-danger" role="alert">  
+                用户名或密码不匹配，请重新登录  
+              </div>  
+            {% endif %}  
+            <form method="post" action="{% url 'users:login' %}">  
+              {% csrf_token %}  
+              {{ form.as_p }}  
+              <button type="submit" class="btn btn-primary btn-block">登录</button>  
+              <p class="text-center">没有账户，<a href="{% url 'users:register' %}">点此</a>注册</p>  
+              <input type="hidden" name="next" value="{% url 'check:index' %}" />  
+            </form>  
+          </div>  
+        </div>  
+      </div>  
+    </div>  
+  </div>  
+{% endblock content %}

@@ -1,0 +1,23 @@
+{% extends "check/base.html" %}  
+  
+{% block content %}  
+  <div class="container mt-5">  
+    <div class="row justify-content-center">  
+      <div class="col-md-6">  
+        <div class="card">  
+          <div class="card-body">  
+            <h5 class="card-title text-center">注册</h5>  
+            <form method="POST" action="{% url 'users:register' %}">  
+              {% csrf_token %}  
+              {{ form.as_p }}  
+  
+              <button type="submit" class="btn btn-success btn-block">注册</button>  
+              <input type="hidden" name="next" value="{% url 'check:index' %}" />  
+              <p class="text-center">已有账户，<a href="{% url 'users:login' %}">点此</a>登录</p>  
+            </form>  
+          </div>  
+        </div>  
+      </div>  
+    </div>  
+  </div>  
+{% endblock content %}

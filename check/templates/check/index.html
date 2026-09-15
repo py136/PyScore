@@ -1,0 +1,17 @@
+{%extends "check/base.html"%}  
+  
+{%block content%}  
+<div class="container mt-5">  
+    <h1 class="text-center mb-4">PyScore</h1>  
+    <p class="text-center mb-4">PyScore,让计分变得更简单</p>  
+    {% if user.is_authenticated %}  
+        <p class="text-center mb-4">欢迎回来, {{ user.username }}!</p>  
+    {% else %}  
+        <p class="text-center mb-4">  
+            <a class="btn btn-primary" href="{% url 'users:login'%}">登录</a>  
+            <a  class="btn btn-secondary" href="{% url 'users:register'%}">注册</a>  
+            账户，开始吧  
+        </p>  
+    {% endif %}  
+</div>  
+{%endblock content%}

@@ -1,0 +1,30 @@
+{%extends "op/base.html"%}  
+  
+{%block content%}  
+<div class="container mt-5">   
+    <h3 class="text-center mb-4">修改用户信息</h3>  
+    <form method="POST" class="form-group" action="{%url 'op:repair_user' tar_user.username %}">  
+        {% csrf_token %}
+        姓氏：
+        <input maxlength="30" value="{{tar_user.last_name}}" name="last_name" required><br>
+        名字：
+        <input maxlength="150" value="{{tar_user.first_name}}" name="first_name" required><br>
+        邮箱：
+        <input value="{{tar_user.email}}" name="email"><br>
+        所属用户组:<br>
+        {% for group in groups %}
+        <label>
+            <input type="radio" name="group" value="{{ group.id }}"
+                   {% if current_group and group.id == current_group.id %}checked{% endif %}>
+            {{ group.name }}
+        </label><br>
+        {% empty %}
+            <p>系统中暂无用户组。</p>
+        {% endfor %}
+        <div class="text-center mt-4">  
+            <button type="submit" class="btn btn-primary">保存修改</button>
+            <a class="btn btn-secondary" href="{%url 'check:user_info' tar_user.username %}">返回</a> 
+        </div>
+    </form>  
+</div>  
+{%endblock content%}

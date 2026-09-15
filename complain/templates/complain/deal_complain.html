@@ -1,0 +1,24 @@
+{%extends "op/base.html"%}  
+  
+{%block content%}  
+<div class="container mt-5">   
+    <form method="POST" class="form-group" action="{% url 'complain:deal_complaint' complaint.id%}">  
+        {% csrf_token %}  
+        <h1>详情</h1>
+        <p>积分原因：{{ entry.text|linebreaks }}</p>
+        <p>申诉原因：{{ complaint.reason|linebreaks }}</p>
+        <p>分数：{{ complaint.score|linebreaks }}</p>
+        <small class="text-muted">申请人：{{complaint.owner.last_name}}{{complaint.owner.first_name}}</small>
+        <br>操作：
+        <select name="deal">
+            <option value="yes">通过</option>
+            <option value="no">不通过</option>
+        </select> 
+        <div class="text-center mt-4">  
+            <button type="submit" class="btn btn-primary">提交</button>
+            <a href="{% url 'check:complaints' %}" class="btn btn-secondary">返回</a>   
+        </div> 
+        
+    </form>  
+</div>  
+{%endblock content%}

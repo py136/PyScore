@@ -1,0 +1,146 @@
+{% extends "check/base.html" %}
+
+{% block content %}
+<style>
+    .ranking-container {
+        font-family: Arial, sans-serif;
+        max-width: 900px;
+        margin: 0 auto;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .ranking-container h1 { text-align: center; color: #2c3e50; }
+
+    /* 个人排名卡片 */
+    .my-rank-card {
+        background: #e8f0fe;
+        padding: 15px 20px;
+        border-radius: 8px;
+        margin-bottom: 25px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .my-rank-card .label { font-weight: bold; color: #2c3e50; }
+    .my-rank-card .score { color: #2980b9; font-size: 1.2em; }
+    .my-rank-card .rank { color: #e67e22; font-size: 1.4em; font-weight: bold; }
+    .my-rank-card .error { color: #e74c3c; }
+    .my-rank-card button {
+        background: #3498db;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    .my-rank-card button:hover { background: #2980b9; }
+
+    /* 表格 */
+    .ranking-container table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    .ranking-container th, .ranking-container td { padding: 10px; border-bottom: 1px solid #ddd; text-align: left; }
+    .ranking-container th { background-color: #f2f2f2; }
+    .pagination { text-align: center; margin: 20px 0; }
+    .pagination a, .pagination span {
+        padding: 5px 10px;
+        margin: 0 2px;
+        border: 1px solid #ccc;
+        text-decoration: none;
+    }
+    .current {
+        background-color: #4CAF50;
+        color: white;
+        border: 1px solid #4CAF50;
+    }
+</style>
+
+<div class="ranking-container">
+    <h1>🏆 全员积分排行榜</h1>
+
+    <!-- 个人排名卡片（整合） -->
+    <div class="my-rank-card" id="my-rank-card">
+        <div>
+            <span class="label">👤 我的排名：</span>
+            <span id="my-rank-info">点击右侧按钮刷新</span>
+        </div>
+        <button onclick="fetchMyRank()">🔄 刷新我的排名</button>
+    </div>
+
+    <!-- 排行榜表格 -->
+    <table>
+        <thead>
+            <tr>
+                <th>排名</th>
+                <th>用户名</th>
+                <th>积分</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for score in page_obj %}
+            <tr>
+                <td>{{ score.rank }}</td>
+                <td>{{ score.owner.username }}</td>
+                <td>{{ score.score }}</td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="3" style="text-align:center;">暂无用户积分数据</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- 分页导航 -->
+    <div class="pagination">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; 首页</a>
+            <a href="?page={{ page_obj.previous_page_number }}">上一页</a>
+        {% endif %}
+
+        <span class="current">
+            第 {{ page_obj.number }} 页 / 共 {{ page_obj.paginator.num_pages }} 页
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">下一页</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">末页 &raquo;</a>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+    function fetchMyRank() {
+        const infoEl = document.getElementById('my-rank-info');
+        infoEl.textContent = '加载中...';
+
+        // 修改 API 路径，加上 /ranking/ 前缀
+        fetch('/ranking/api/my-rank/')
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(data => {
+                        throw new Error(data.error || '请求失败');
+                    });
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.error) {
+                    infoEl.innerHTML = `<span class="error">${data.error}</span>`;
+                } else {
+                    infoEl.innerHTML = `
+                        积分：<span class="score">${data.score}</span> &nbsp;|&nbsp; 
+                        排名：<span class="rank">#${data.rank}</span>
+                    `;
+                }
+            })
+            .catch(error => {
+                infoEl.innerHTML = `<span class="error">⚠️ ${error.message}</span>`;
+            });
+    }
+
+    // 页面加载完成后自动获取一次（可选）
+    document.addEventListener('DOMContentLoaded', function() {
+        fetchMyRank();
+    });
+</script>
+{% endblock content %}

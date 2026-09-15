@@ -1,0 +1,25 @@
+{%extends "op/base.html"%}  
+  
+{%block content%}  
+<div class="container mt-5">  
+    <div class="row">  
+        <div class="col-md-12">  
+            <h3>申诉</h3>  
+  
+            <ul class="list-group">
+                {% for complaint in complaints %}  
+                <li class="list-group-item">  
+                    <p>申诉原因：{{ complaint.reason|linebreaks }}</p>  
+                    <small class="text-muted">申请人：{{complaint.owner.last_name}}{{complaint.owner.first_name}}</small>
+                    <a class="btn btn-success" href="{%url 'complain:deal_complaint' complaint.id%}">详情</a>
+                </li>
+                {% empty %}
+                <li class="list-group-item">
+                    还没有申诉
+                </li>
+                {% endfor %} 
+            </ul>  
+        </div>  
+    </div>  
+</div>  
+{%endblock content%}

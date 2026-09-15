@@ -1,0 +1,23 @@
+{%extends "op/base.html"%}  
+  
+{%block content%}  
+<div class="container mt-5">  
+    <div class="row">  
+        <div class="col-md-12">
+            <a class="btn btn-success" href="{% url 'add:add_score' %}">添加积分情况</a>  
+           
+            <ul class="list-group">
+                {% for user in users %}  
+                <li class="list-group-item">
+                   <a href="{% url 'check:details' user.username %}">{{user.last_name}}{{user.first_name}}</a>
+                </li>
+                {% empty %}
+                <li class="list-group-item">
+                    还没有任何用户
+                </li>
+                {% endfor %} 
+            </ul>  
+        </div>  
+    </div>  
+</div>  
+{%endblock content%}
